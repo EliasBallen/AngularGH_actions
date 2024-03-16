@@ -14,13 +14,17 @@ jobs:
               with:
                 node-version: '20'
             - name: checkfiles
-              run: ls    
+              run: ls
+            - name: checkfiles
+              run: cd //
+            - name: checkfiles
+              run: ls      
     build: 
         needs: angular
         runs-on: ubuntu-latest
         steps:
           - name: Install dependencies
-            run: npm install
+            run: npm install 
     
           - name: Build
             run: npm run deploy
