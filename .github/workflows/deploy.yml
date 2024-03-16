@@ -12,7 +12,9 @@ jobs:
             - name: setup node js
               uses: actions/setup-node@v4
               with:
-                node-version: '20'    
+                node-version: '20'
+            - name: checkfiles
+              run: ls    
     build: 
         needs: angular
         runs-on: ubuntu-latest
