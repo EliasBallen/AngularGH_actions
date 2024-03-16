@@ -29,13 +29,11 @@ jobs:
                   
             - name: Build
               run: npm run build --prod --base-href=/AngularGithubActions/
-            - name: Fix permissions
-              run: |
-                  chmod -v -R +rX "_site/" | while read line; do
-                    echo "::warning title=Invalid file permissions automatically fixed::$line"
-                  done
-            - name: Upload Pages artifact
-              uses: actions/upload-pages-artifact@v3                      
+            - name: Upload artifact
+              uses: actions/upload-artifact@v4
+              with:
+                name: github-pages
+                path: dist # or path/to/artifact             
     deploy:
         needs: build
         runs-on: ubuntu-latest
@@ -47,6 +45,15 @@ jobs:
               run: ls -i
             - name: check sync links
               run: ls -l
+            - name: Download artifact
+              uses: actions/download-artifact@v4
+              with:
+                name: github-pages  # Nombre del artefacto a descargar
+                path: dist  # Ruta donde se colocarán los artefactos
             - name: Deploy to GitHub Pages
               id: deployment
               uses: actions/deploy-pages@v4
+              with:
+                github_token: ${{ secrets.GITHUB_TOKEN }}
+                branch: main
+                folder: dist/AngularGithubActions
