@@ -43,6 +43,10 @@ jobs:
             name: github-pages
             url: ${{ steps.deployment.outputs.page_url }}
         steps:
+            - name: check hard links
+              run: ls -i
+            - name: check sync links
+              run: ls -l
             - name: Download artifact
               uses: actions/download-artifact@v4
               with:
