@@ -30,17 +30,11 @@ jobs:
             - name: Build
               run: npm run build --prod
             
-    deploy:
-        needs: build
-        runs-on: ubuntu-latest
-        environment:
-            name: github-pages
-
-        steps:
-          - name: check folders
-            run: ls
-          - name: Deploy 🚀
-            uses: JamesIves/github-pages-deploy-action@v4
-            with:
-              folder: dist/angular-github-actions # The folder the action should deploy.
+            - name: check folders
+              run: ls
+            - name: Deploy 🚀
+              uses: JamesIves/github-pages-deploy-action@v4
+              with:
+                folder: dist/angular-github-actions # The folder the action should deploy.
           
+            
