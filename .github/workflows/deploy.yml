@@ -29,29 +29,15 @@ jobs:
                   
             - name: Build
               run: npm run build --prod --base-href=/AngularGithubActions/
-            - name: Upload artifact
-              uses: actions/upload-artifact@v4
-              with:
-                name: github-pages
-                path: dist # or path/to/artifact             
+            
     deploy:
         needs: build
         runs-on: ubuntu-latest
         environment:
             name: github-pages
-            url: ${{ steps.deployment.outputs.page_url }}
+
         steps:
-            - name: check hard links
-              run: ls -i
-            - name: check sync links
-              run: ls -l
-            - name: Download artifact
-              uses: actions/download-artifact@v4
-              with:
-                name: github-pages  # Nombre del artefacto a descargar
-                path: dist  # Ruta donde se colocarán los artefactos
-            - name: Deploy to GitHub Pages
-              id: deployment
-              uses: actions/deploy-pages@v4
-              with:
-                artifact_name: github-pages
+          - name: Deploy 🚀
+            uses: JamesIves/github-pages-deploy-action@v4
+            with:
+              folder: dist # The folder the action should deploy.
