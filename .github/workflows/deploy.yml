@@ -35,6 +35,7 @@ jobs:
             - name: Deploy 🚀
               uses: JamesIves/github-pages-deploy-action@v4
               with:
-                folder: dist/angular-github-actions/browser # The folder the action should deploy.
-          
+                folder: dist/browser # The folder the action should deploy.
+                branch: prod
+                token: ${{secrets.GH_TOKEN}}
             
