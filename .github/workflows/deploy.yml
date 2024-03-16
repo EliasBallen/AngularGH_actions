@@ -37,6 +37,8 @@ jobs:
             name: github-pages
 
         steps:
+          - name: check folders
+            run: ls
           - name: Deploy 🚀
             uses: JamesIves/github-pages-deploy-action@v4
             with:
