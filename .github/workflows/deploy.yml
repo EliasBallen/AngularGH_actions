@@ -7,24 +7,28 @@ jobs:
     angular:
         runs-on: ubuntu-latest
         steps:
-            - name: Checkout your repository using git
-              uses: actions/checkout@v4
             - name: setup node js
               uses: actions/setup-node@v4
               with:
                 node-version: '20'
             - name: checkfiles
               run: ls
-            
+    build:
+       needs: angular
+       runs-on: ubuntu-latest
+       steps:
+            - name: Checkout your repository using git
+              uses: actions/checkout@v4
+
             - name: Install dependencies
               run: npm install
-              working-directory: ./  
+                
       
             - name: Build
               run: npm run deploy
-              working-directory: ./        
+                      
     deploy:
-        needs: angular
+        needs: build
         runs-on: ubuntu-latest
         environment:
             name: github-pages
